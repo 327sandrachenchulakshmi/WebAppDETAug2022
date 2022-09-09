@@ -4,30 +4,27 @@ using MVCDemo.Service;
 
 namespace MVCDemo.Controllers
 {
-    public class PizzaController : Controller
+    public class FriendController1 : Controller
     {
         public IActionResult Index()
+
         {
-            List<Pizza> Pizzas = PizzaService.GetAll();
-
-            return View(Pizzas);
+            List<Friend> PFriends = FriendServices.GetAll();
+            return View();
         }
-
-
-
         public IActionResult Details(int id)
         {
-            Pizza P = PizzaService.Get(id);
+            Friend P = FriendServices.Get(id);
             return View(P);
         }
 
 
         public IActionResult List(int id)
         {
-            List<Pizza> Pizzas = PizzaService.GetAll();
-            
+            List<Friend> Friends = FriendServices.GetAll();
+
             //Pizza P = PizzaService.Get(id);
-            return View(Pizzas);
+            return View(Friends);
             //List<Pizza> Pizzas = PizzaService.GetAll();
 
             //return View(Pizzas);
@@ -44,27 +41,27 @@ namespace MVCDemo.Controllers
         //    PizzaService.Add(p);
         //    return RedirectToAction("List");
         //}
-        public IActionResult Create(int id, string name,int size,decimal price,bool Isglutenfree)
+        public IActionResult Create(int id, string name, string place)
         {
-            Pizza p = new Pizza { Id = id, Name = name, Size = (PizzaSize)size, Price = price, IsGlutenFree = Isglutenfree }; ;
-            PizzaService.Add(p);
+            Friend f = new Friend { FriendId = id, FriendName = name, Place=place }; ;
+            FriendServices.Add(f);
             return RedirectToAction("List");
         }
 
 
         public IActionResult Delete(int id)
         {
-            Pizza P = PizzaService.Get(id);
-            if (P != null)
-                return View(P);
+            Friend f = FriendServices.Get(id);
+            if (f != null)
+                return View(f);
             else
                 return RedirectToAction("List");
         }
         [HttpPost]
-        public IActionResult Delete(Pizza p)
+        public IActionResult Delete(Friend f)
         {
 
-            PizzaService.Delete(p.Id);
+            FriendServices.Delete(f.FriendId);
             return RedirectToAction("List");
 
         }
@@ -76,16 +73,12 @@ namespace MVCDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int id, string name, int size, decimal price, bool isglutenfree)
+        public IActionResult Update(int id, string name, string place)
         {
-            Pizza p = new Pizza { Id = id, Name = name, Size = (PizzaSize)size, Price = price, IsGlutenFree = isglutenfree };
-            PizzaService.Update(p);
+            Friend f= new Friend { FriendId = id, FriendName = name, Place = place };
+            FriendServices.Update(f);
             return RedirectToAction("List");
         }
     }
-
-
-
-
 }
 
