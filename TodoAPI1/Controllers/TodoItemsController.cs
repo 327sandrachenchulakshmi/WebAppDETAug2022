@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoAPI1.Data;
 using TodoApi.Models;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace TodoAPI1.Controllers
 {
@@ -34,6 +35,7 @@ namespace TodoAPI1.Controllers
 
         // GET: api/TodoItems/5
         [HttpGet("{id}")]
+        [EnableQuery]
         public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
         {
           if (_context.TodoItem == null)
@@ -53,6 +55,7 @@ namespace TodoAPI1.Controllers
         // PUT: api/TodoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+     
         public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
         {
             if (id != todoItem.Id)
@@ -84,6 +87,7 @@ namespace TodoAPI1.Controllers
         // POST: api/TodoItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
         {
           if (_context.TodoItem == null)

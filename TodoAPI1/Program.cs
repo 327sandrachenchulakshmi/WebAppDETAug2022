@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 using TodoAPI1.Data;
-
+using Microsoft.AspNetCore.OData;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoAPI1Context>(options =>
@@ -10,7 +10,7 @@ builder.Services.AddDbContext<TodoAPI1Context>(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddOData(Options => Options.Select());
 builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseInMemoryDatabase("TodoList"));
 builder.Services.AddSwaggerGen(c =>
